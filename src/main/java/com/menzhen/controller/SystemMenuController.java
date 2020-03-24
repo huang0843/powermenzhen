@@ -88,7 +88,7 @@ public class SystemMenuController extends BaseController{
         ResultBean bean=null;
         try {
             Manager manager=getLoginManager();
-            List<SystemMenu> list=mapper.selectbyManagerid(manager.getManagerId());
+            List<SystemMenu> list=mapper.selectbyManagerid(7);
             List<SystemMenu> temp=new ArrayList<>();
             for (SystemMenu s:list
             ) {

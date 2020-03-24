@@ -21,7 +21,7 @@
 
   <!--根据 登陆的管理员查询对应的菜单-->
   <select id="selectbyManagerid" parameterType="int" resultMap="BaseResultMap">
-    select DISTINCT m1.* from(
+     select DISTINCT m1.* from(
     select menu.* from
     power_manager m left join power_manger_role_rf rf
     on m.manager_id=rf.rf_mangerid
