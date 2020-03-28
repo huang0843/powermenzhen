@@ -29,7 +29,7 @@
 					<div class='icon'>
 						<img alt="" src='<%=basePath%>static/login/img/user_icon_copy.png'>
 					</div>
-					<input name="username" value="16161616666" id="username" placeholder='请输入手机号' maxlength="16" type='text' autocomplete="off"  />
+					<input name="username" value="18270630843" id="username" placeholder='请输入手机号' maxlength="16" type='text' autocomplete="off"  />
 					<div class='validation'>
 						<img alt="" src='<%=basePath%>static/login/img/tick.png'>
 					</div>
