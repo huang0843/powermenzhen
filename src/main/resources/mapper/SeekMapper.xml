@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.menzhen.dao.SeekMapper" >
+  <resultMap id="BaseResultMap" type="com.menzhen.bean.Seek" >
+    <id column="seek_id" property="seekId" jdbcType="INTEGER" />
+    <result column="seek_docter" property="seekDocter" jdbcType="VARCHAR" />
+    <result column="seek_number" property="seekNumber" jdbcType="INTEGER" />
+    <result column="seek_name" property="seekName" jdbcType="VARCHAR" />
+    <result column="seek_proposal" property="seekProposal" jdbcType="VARCHAR" />
+    <result column="seek_drug" property="seekDrug" jdbcType="VARCHAR" />
+    <result column="seek_drugcount" property="seekDrugcount" jdbcType="INTEGER" />
+    <result column="seek_date" property="seekDate" jdbcType="TIMESTAMP" />
+    <collection property="register" ofType="com.menzhen.bean.Register">
+      <id column="register_id" property="registerId" jdbcType="INTEGER" />
+      <result column="register_number" property="registerNumber" jdbcType="INTEGER" />
+      <result column="register_name" property="registerName" jdbcType="VARCHAR" />
+      <result column="register_reason" property="registerReason" jdbcType="VARCHAR" />
+      <result column="register_doctor" property="registerDoctor" jdbcType="VARCHAR" />
+      <result column="register_type" property="registerType" jdbcType="VARCHAR" />
+      <result column="register_money" property="registerMoney" jdbcType="REAL" />
+      <result column="register_date" property="registerDate" jdbcType="DATE" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seek_id, seek_docter, seek_number, seek_name, seek_proposal, seek_drug, seek_drugcount, 
+    seek_date
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select b.register_number,b.register_name,b.register_doctor, a.* from register b
+    LEFT JOIN seek a ON a.seek_docter=b.register_doctor
+    <where>
+      <if test="seek_number!=null">
+        seek_number=#{seek_number}
+      </if>
+      <if test="seek_name!=null">
+        seek_name=#{seek_name}
+      </if>
+    </where>
+    ORDER BY a.seek_id;
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from seek
+    where seek_id = #{seekId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from seek
+    where seek_id = #{seekId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.menzhen.bean.Seek" >
+    insert into seek (seek_id, seek_docter, seek_number, 
+      seek_name, seek_proposal, seek_drug, 
+      seek_drugcount, seek_date)
+    values (#{seekId,jdbcType=INTEGER}, #{seekDocter,jdbcType=VARCHAR}, #{seekNumber,jdbcType=INTEGER}, 
+      #{seekName,jdbcType=VARCHAR}, #{seekProposal,jdbcType=VARCHAR}, #{seekDrug,jdbcType=VARCHAR}, 
+      #{seekDrugcount,jdbcType=INTEGER}, #{seekDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.menzhen.bean.Seek" >
+    insert into seek
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seekId != null" >
+        seek_id,
+      </if>
+      <if test="seekDocter != null" >
+        seek_docter,
+      </if>
+      <if test="seekNumber != null" >
+        seek_number,
+      </if>
+      <if test="seekName != null" >
+        seek_name,
+      </if>
+      <if test="seekProposal != null" >
+        seek_proposal,
+      </if>
+      <if test="seekDrug != null" >
+        seek_drug,
+      </if>
+      <if test="seekDrugcount != null" >
+        seek_drugcount,
+      </if>
+      <if test="seekDate != null" >
+        seek_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seekId != null" >
+        #{seekId,jdbcType=INTEGER},
+      </if>
+      <if test="seekDocter != null" >
+        #{seekDocter,jdbcType=VARCHAR},
+      </if>
+      <if test="seekNumber != null" >
+        #{seekNumber,jdbcType=INTEGER},
+      </if>
+      <if test="seekName != null" >
+        #{seekName,jdbcType=VARCHAR},
+      </if>
+      <if test="seekProposal != null" >
+        #{seekProposal,jdbcType=VARCHAR},
+      </if>
+      <if test="seekDrug != null" >
+        #{seekDrug,jdbcType=VARCHAR},
+      </if>
+      <if test="seekDrugcount != null" >
+        #{seekDrugcount,jdbcType=INTEGER},
+      </if>
+      <if test="seekDate != null" >
+        #{seekDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.menzhen.bean.Seek" >
+    update seek
+    <set >
+      <if test="seekDocter != null" >
+        seek_docter = #{seekDocter,jdbcType=VARCHAR},
+      </if>
+      <if test="seekNumber != null" >
+        seek_number = #{seekNumber,jdbcType=INTEGER},
+      </if>
+      <if test="seekName != null" >
+        seek_name = #{seekName,jdbcType=VARCHAR},
+      </if>
+      <if test="seekProposal != null" >
+        seek_proposal = #{seekProposal,jdbcType=VARCHAR},
+      </if>
+      <if test="seekDrug != null" >
+        seek_drug = #{seekDrug,jdbcType=VARCHAR},
+      </if>
+      <if test="seekDrugcount != null" >
+        seek_drugcount = #{seekDrugcount,jdbcType=INTEGER},
+      </if>
+      <if test="seekDate != null" >
+        seek_date = #{seekDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where seek_id = #{seekId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.menzhen.bean.Seek" >
+    update seek
+    set seek_docter = #{seekDocter,jdbcType=VARCHAR},
+      seek_number = #{seekNumber,jdbcType=INTEGER},
+      seek_name = #{seekName,jdbcType=VARCHAR},
+      seek_proposal = #{seekProposal,jdbcType=VARCHAR},
+      seek_drug = #{seekDrug,jdbcType=VARCHAR},
+      seek_drugcount = #{seekDrugcount,jdbcType=INTEGER},
+      seek_date = #{seekDate,jdbcType=TIMESTAMP}
+    where seek_id = #{seekId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -23,21 +23,23 @@
             border
             highlight-hover-row
             highlight-current-row
+            resizable
             show-overflow
             keep-source
             ref="xTable"
             max-height="400"
+            highlight-hover-row
             :data="tableData"
             :edit-config="{trigger: 'dblclick', mode: 'cell', icon: 'fa fa-pencil',showStatus: true}">
         <vxe-table-column type="radio" width="60"></vxe-table-column>
-        <vxe-table-column field="registerId" title="挂号id" sortable :edit-render="{name: 'input'}" :visible="false"></vxe-table-column>
-        <vxe-table-column field="registerNumber" title="挂号编号" sortable :edit-render="{name: 'input'}"></vxe-table-column>
-        <vxe-table-column field="registerName" title="姓名" sortable :edit-render="{name: 'input', defaultValue: '请输入病人姓名'}"></vxe-table-column>
-        <vxe-table-column field="registerReason" title="挂号科室" sortable :edit-render="{name: 'input'}"></vxe-table-column>
-        <vxe-table-column field="registerDoctor" title="挂号医生" sortable :edit-render="{name: 'input'}"></vxe-table-column>
-        <vxe-table-column field="registerType" title="挂号类别" :edit-render="{name: 'select', options: typeList,defaultValue: '普通号'}"></vxe-table-column>
-        <vxe-table-column field="registerMoney" title="金额" sortable :edit-render="{name: 'input', defaultValue: 10}"></vxe-table-column>
-        <vxe-table-column field="registerDate" title="日期" sortable :edit-render="{name: '$input', props: {type: 'date'}, autoselect: true}"></vxe-table-column>
+        <vxe-table-column field="seekId" title="挂号id" sortable :edit-render="{name: 'input'}" :visible="false"></vxe-table-column>
+        <vxe-table-column field="registerNumber" title="挂号编号" sortable :edit-render="{name: 'input'}" width="200"></vxe-table-column>
+        <vxe-table-column field="registerName" title="姓名" sortable :edit-render="{name: 'input', defaultValue: '请输入病人姓名'}" width="200"></vxe-table-column>
+        <vxe-table-column field="registerDoctor" title="挂号医生" sortable :edit-render="{name: 'input'}" width="200"></vxe-table-column>
+        <vxe-table-column field="seekProposal" title="医生建议" sortable :edit-render="{name: 'input'}" width="200"></vxe-table-column>
+        <vxe-table-column field="seekDrug" title="处方药" :edit-render="{name: 'select', options: typeList}" width="200"></vxe-table-column>
+        <vxe-table-column field="seekDrugcount" title="数量" sortable :edit-render="{name: 'input', defaultValue: 10}" width="200"></vxe-table-column>
+        <vxe-table-column field="seekDate" title="就诊日期" sortable :edit-render="{name: '$input', props: {type: 'date'}, autoselect: true}" width="300"></vxe-table-column>
     </vxe-table>
 
 </div>
@@ -55,8 +57,8 @@
                 tableData: [],
                 typeList: [
                     { label: '', value: '' },
-                    { label: '普通号', value: '普通号' },
-                    { label: '专家号', value: '专家号' }
+                    { label: '阿司匹林', value: '阿司匹林' },
+                    { label: '托西溴苄铵', value: '托西溴苄铵' }
                 ]
             }
         },
@@ -66,7 +68,7 @@
         methods: {
             getdata(){
                 var self=this;
-                axios.get('<%=basePath%>admin/menzhen/list').
+                axios.get('<%=basePath%>admin/menzhen/SeekList').
                 then(function (response) {
                     if(response.data.code=='10000'){
                         self.tableData=response.data.obj;

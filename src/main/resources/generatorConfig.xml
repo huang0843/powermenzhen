@@ -53,6 +53,35 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+        <!--<table schema="" tableName="register" domainObjectName="Register"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<property name="selectAllOrderByClause" value="id desc"/>-->
+        <!--<property name="useActualColumnNames" value="false" />-->
+        <!--</table>-->
+        <!--<table schema="" tableName="seek" domainObjectName="Seek"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="selectAllOrderByClause" value="id desc"/>-->
+            <!--<property name="useActualColumnNames" value="false" />-->
+        <!--</table>-->
+        <!--<table schema="" tableName="drug" domainObjectName="Drug"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="selectAllOrderByClause" value="id desc"/>-->
+            <!--<property name="useActualColumnNames" value="false" />-->
+        <!--</table>-->
+        <!--<table schema="" tableName="pay" domainObjectName="Pay"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="selectAllOrderByClause" value="id desc"/>-->
+            <!--<property name="useActualColumnNames" value="false" />-->
+        <!--</table>-->
+
          <!--<table schema="" tableName="Power_Manager" domainObjectName="Manager"-->
                <!--enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

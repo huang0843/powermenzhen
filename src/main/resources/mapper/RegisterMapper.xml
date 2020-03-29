@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.menzhen.dao.RegisterMapper" >
+  <resultMap id="BaseResultMap" type="com.menzhen.bean.Register" >
+    <id column="register_id" property="registerId" jdbcType="INTEGER" />
+    <result column="register_number" property="registerNumber" jdbcType="INTEGER" />
+    <result column="register_name" property="registerName" jdbcType="VARCHAR" />
+    <result column="register_reason" property="registerReason" jdbcType="VARCHAR" />
+    <result column="register_doctor" property="registerDoctor" jdbcType="VARCHAR" />
+    <result column="register_type" property="registerType" jdbcType="VARCHAR" />
+    <result column="register_money" property="registerMoney" jdbcType="REAL" />
+    <result column="register_date" property="registerDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    register_id, register_number, register_name, register_reason, register_doctor, register_type, 
+    register_money, register_date
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT * from register a
+    ORDER by a.register_id desc
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from register
+    where register_id = #{registerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from register
+    where register_id = #{registerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.menzhen.bean.Register" >
+    insert into register (register_id, register_number, register_name, 
+      register_reason, register_doctor, register_type, 
+      register_money, register_date)
+    values (#{registerId,jdbcType=INTEGER}, #{registerNumber,jdbcType=INTEGER}, #{registerName,jdbcType=VARCHAR}, 
+      #{registerReason,jdbcType=VARCHAR}, #{registerDoctor,jdbcType=VARCHAR}, #{registerType,jdbcType=VARCHAR}, 
+      #{registerMoney,jdbcType=REAL}, #{registerDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.menzhen.bean.Register" >
+    insert into register
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="registerId != null" >
+        register_id,
+      </if>
+      <if test="registerNumber != null" >
+        register_number,
+      </if>
+      <if test="registerName != null" >
+        register_name,
+      </if>
+      <if test="registerReason != null" >
+        register_reason,
+      </if>
+      <if test="registerDoctor != null" >
+        register_doctor,
+      </if>
+      <if test="registerType != null" >
+        register_type,
+      </if>
+      <if test="registerMoney != null" >
+        register_money,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="registerId != null" >
+        #{registerId,jdbcType=INTEGER},
+      </if>
+      <if test="registerNumber != null" >
+        #{registerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="registerName != null" >
+        #{registerName,jdbcType=VARCHAR},
+      </if>
+      <if test="registerReason != null" >
+        #{registerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDoctor != null" >
+        #{registerDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null" >
+        #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerMoney != null" >
+        #{registerMoney,jdbcType=REAL},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.menzhen.bean.Register" >
+    update register
+    <set >
+      <if test="registerNumber != null" >
+        register_number = #{registerNumber,jdbcType=INTEGER},
+      </if>
+      <if test="registerName != null" >
+        register_name = #{registerName,jdbcType=VARCHAR},
+      </if>
+      <if test="registerReason != null" >
+        register_reason = #{registerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDoctor != null" >
+        register_doctor = #{registerDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null" >
+        register_type = #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerMoney != null" >
+        register_money = #{registerMoney,jdbcType=REAL},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=DATE},
+      </if>
+    </set>
+    where register_id = #{registerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.menzhen.bean.Register" >
+    update register
+    set register_number = #{registerNumber,jdbcType=INTEGER},
+      register_name = #{registerName,jdbcType=VARCHAR},
+      register_reason = #{registerReason,jdbcType=VARCHAR},
+      register_doctor = #{registerDoctor,jdbcType=VARCHAR},
+      register_type = #{registerType,jdbcType=VARCHAR},
+      register_money = #{registerMoney,jdbcType=REAL},
+      register_date = #{registerDate,jdbcType=DATE}
+    where register_id = #{registerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.menzhen.dao.DrugMapper" >
+  <resultMap id="BaseResultMap" type="com.menzhen.bean.Drug" >
+    <id column="drug_id" property="drugId" jdbcType="INTEGER" />
+    <result column="drug_name" property="drugName" jdbcType="VARCHAR" />
+    <result column="drug_function" property="drugFunction" jdbcType="VARCHAR" />
+    <result column="drug_money" property="drugMoney" jdbcType="REAL" />
+    <result column="drug_sort" property="drugSort" jdbcType="VARCHAR" />
+    <result column="drug_number" property="drugNumber" jdbcType="INTEGER" />
+    <result column="drug_count" property="drugCount" jdbcType="INTEGER" />
+    <result column="drug_creattime" property="drugCreattime" jdbcType="DATE" />
+    <result column="drug_lasttime" property="drugLasttime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    drug_id, drug_name, drug_function, drug_money, drug_sort, drug_number, drug_count, 
+    drug_creattime, drug_lasttime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from drug
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from drug
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.menzhen.bean.Drug" >
+    insert into drug (drug_id, drug_name, drug_function, 
+      drug_money, drug_sort, drug_number, 
+      drug_count, drug_creattime, drug_lasttime
+      )
+    values (#{drugId,jdbcType=INTEGER}, #{drugName,jdbcType=VARCHAR}, #{drugFunction,jdbcType=VARCHAR}, 
+      #{drugMoney,jdbcType=REAL}, #{drugSort,jdbcType=VARCHAR}, #{drugNumber,jdbcType=INTEGER}, 
+      #{drugCount,jdbcType=INTEGER}, #{drugCreattime,jdbcType=DATE}, #{drugLasttime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.menzhen.bean.Drug" >
+    insert into drug
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drugId != null" >
+        drug_id,
+      </if>
+      <if test="drugName != null" >
+        drug_name,
+      </if>
+      <if test="drugFunction != null" >
+        drug_function,
+      </if>
+      <if test="drugMoney != null" >
+        drug_money,
+      </if>
+      <if test="drugSort != null" >
+        drug_sort,
+      </if>
+      <if test="drugNumber != null" >
+        drug_number,
+      </if>
+      <if test="drugCount != null" >
+        drug_count,
+      </if>
+      <if test="drugCreattime != null" >
+        drug_creattime,
+      </if>
+      <if test="drugLasttime != null" >
+        drug_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drugId != null" >
+        #{drugId,jdbcType=INTEGER},
+      </if>
+      <if test="drugName != null" >
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugFunction != null" >
+        #{drugFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="drugMoney != null" >
+        #{drugMoney,jdbcType=REAL},
+      </if>
+      <if test="drugSort != null" >
+        #{drugSort,jdbcType=VARCHAR},
+      </if>
+      <if test="drugNumber != null" >
+        #{drugNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugCount != null" >
+        #{drugCount,jdbcType=INTEGER},
+      </if>
+      <if test="drugCreattime != null" >
+        #{drugCreattime,jdbcType=DATE},
+      </if>
+      <if test="drugLasttime != null" >
+        #{drugLasttime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.menzhen.bean.Drug" >
+    update drug
+    <set >
+      <if test="drugName != null" >
+        drug_name = #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugFunction != null" >
+        drug_function = #{drugFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="drugMoney != null" >
+        drug_money = #{drugMoney,jdbcType=REAL},
+      </if>
+      <if test="drugSort != null" >
+        drug_sort = #{drugSort,jdbcType=VARCHAR},
+      </if>
+      <if test="drugNumber != null" >
+        drug_number = #{drugNumber,jdbcType=INTEGER},
+      </if>
+      <if test="drugCount != null" >
+        drug_count = #{drugCount,jdbcType=INTEGER},
+      </if>
+      <if test="drugCreattime != null" >
+        drug_creattime = #{drugCreattime,jdbcType=DATE},
+      </if>
+      <if test="drugLasttime != null" >
+        drug_lasttime = #{drugLasttime,jdbcType=DATE},
+      </if>
+    </set>
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.menzhen.bean.Drug" >
+    update drug
+    set drug_name = #{drugName,jdbcType=VARCHAR},
+      drug_function = #{drugFunction,jdbcType=VARCHAR},
+      drug_money = #{drugMoney,jdbcType=REAL},
+      drug_sort = #{drugSort,jdbcType=VARCHAR},
+      drug_number = #{drugNumber,jdbcType=INTEGER},
+      drug_count = #{drugCount,jdbcType=INTEGER},
+      drug_creattime = #{drugCreattime,jdbcType=DATE},
+      drug_lasttime = #{drugLasttime,jdbcType=DATE}
+    where drug_id = #{drugId,jdbcType=INTEGER}
+  </update>
+</mapper>

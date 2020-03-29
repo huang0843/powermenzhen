@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.menzhen.dao.PayMapper" >
+  <resultMap id="BaseResultMap" type="com.menzhen.bean.Pay" >
+    <id column="pay_id" property="payId" jdbcType="INTEGER" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
+    <result column="pay_register" property="payRegister" jdbcType="REAL" />
+    <result column="pay_drug" property="payDrug" jdbcType="REAL" />
+    <result column="pay_all" property="payAll" jdbcType="REAL" />
+    <result column="pay_date" property="payDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pay_id, pay_name, pay_register, pay_drug, pay_all, pay_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pay
+    where pay_id = #{payId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pay
+    where pay_id = #{payId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.menzhen.bean.Pay" >
+    insert into pay (pay_id, pay_name, pay_register, 
+      pay_drug, pay_all, pay_date)
+    values (#{payId,jdbcType=INTEGER}, #{payName,jdbcType=VARCHAR}, #{payRegister,jdbcType=REAL}, 
+      #{payDrug,jdbcType=REAL}, #{payAll,jdbcType=REAL}, #{payDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.menzhen.bean.Pay" >
+    insert into pay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="payName != null" >
+        pay_name,
+      </if>
+      <if test="payRegister != null" >
+        pay_register,
+      </if>
+      <if test="payDrug != null" >
+        pay_drug,
+      </if>
+      <if test="payAll != null" >
+        pay_all,
+      </if>
+      <if test="payDate != null" >
+        pay_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        #{payId,jdbcType=INTEGER},
+      </if>
+      <if test="payName != null" >
+        #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="payRegister != null" >
+        #{payRegister,jdbcType=REAL},
+      </if>
+      <if test="payDrug != null" >
+        #{payDrug,jdbcType=REAL},
+      </if>
+      <if test="payAll != null" >
+        #{payAll,jdbcType=REAL},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.menzhen.bean.Pay" >
+    update pay
+    <set >
+      <if test="payName != null" >
+        pay_name = #{payName,jdbcType=VARCHAR},
+      </if>
+      <if test="payRegister != null" >
+        pay_register = #{payRegister,jdbcType=REAL},
+      </if>
+      <if test="payDrug != null" >
+        pay_drug = #{payDrug,jdbcType=REAL},
+      </if>
+      <if test="payAll != null" >
+        pay_all = #{payAll,jdbcType=REAL},
+      </if>
+      <if test="payDate != null" >
+        pay_date = #{payDate,jdbcType=DATE},
+      </if>
+    </set>
+    where pay_id = #{payId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.menzhen.bean.Pay" >
+    update pay
+    set pay_name = #{payName,jdbcType=VARCHAR},
+      pay_register = #{payRegister,jdbcType=REAL},
+      pay_drug = #{payDrug,jdbcType=REAL},
+      pay_all = #{payAll,jdbcType=REAL},
+      pay_date = #{payDate,jdbcType=DATE}
+    where pay_id = #{payId,jdbcType=INTEGER}
+  </update>
+</mapper>
