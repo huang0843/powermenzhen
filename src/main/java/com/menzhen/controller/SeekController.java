@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,5 +62,27 @@ public class SeekController {
 		return bean;
 	}
 
+	//保存就诊记录
+	@RequestMapping("seekSave")
+	@ResponseBody
+	public Object save(Seek seek)
+	{
+		ResultBean bean=null;
+		try {
+			int rows=0;
+			seek.setSeekDate(new Date());
+			rows=seekMapper.insertSelective(seek);
+			if(rows>0){
+				bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
+			}else {
+				bean=new ResultBean(ResultBean.Code.FAIL);//枚举写法
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			bean=new ResultBean(ResultBean.Code.EXCEPTION);
+			bean.setMsg(e.getMessage());
+		}
+		return bean;
+	}
 
 }

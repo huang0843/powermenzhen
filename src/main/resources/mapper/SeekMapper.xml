@@ -33,7 +33,7 @@
         seek_number=#{seek_number}
       </if>
       <if test="seek_name!=null">
-        seek_name=#{seek_name}
+        and seek_name=#{seek_name}
       </if>
     </where>
     ORDER BY a.seek_id;

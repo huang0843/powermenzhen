@@ -16,6 +16,24 @@
     drug_id, drug_name, drug_function, drug_money, drug_sort, drug_number, drug_count, 
     drug_creattime, drug_lasttime
   </sql>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT a.* from drug a
+    <where>
+      <if test="drug_name!=null">
+        drug_name=#{drug_name}
+      </if>
+      <if test="drug_sort!=null">
+       and drug_sort=#{drug_sort}
+      </if>
+    </where>
+    order by drug_name;
+  </select>
+
+  <select id="selectName" resultMap="BaseResultMap">
+    SELECT a.drug_name from drug a  order by drug_name;
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
