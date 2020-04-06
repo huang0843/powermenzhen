@@ -2,6 +2,9 @@ package com.menzhen.dao;
 
 import com.menzhen.bean.Pay;
 
+import java.util.List;
+import java.util.Map;
+
 public interface PayMapper {
     int deleteByPrimaryKey(Integer payId);
 
@@ -14,4 +17,6 @@ public interface PayMapper {
     int updateByPrimaryKeySelective(Pay record);
 
     int updateByPrimaryKey(Pay record);
+
+    List<Pay> selectName(Map map);
 }

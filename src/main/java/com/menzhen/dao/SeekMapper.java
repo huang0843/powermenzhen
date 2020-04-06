@@ -19,4 +19,6 @@ public interface SeekMapper {
     int updateByPrimaryKey(Seek record);
 
     List<Seek> selectAll(Map map);
+
+    List<Seek> selectDrug(Map map);
 }

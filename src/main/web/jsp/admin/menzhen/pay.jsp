@@ -6,21 +6,21 @@
 %>
 <html>
 <head>
-    <title>医生就诊</title>
+    <title>缴纳费用</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
 <div id="app">
     <el-row :gutter="20">
-    <el-col :span="6" >
-        <el-input
-                @keyup.enter.native="searchx"
-                v-model="param"
-                placeholder="输入患者姓名搜索">
-            <el-button slot="append" icon="el-icon-search" @click="searchx"></el-button>
-        </el-input>
-    </el-col>
+        <el-col :span="6" >
+            <el-input
+                    @keyup.enter.native="searchx"
+                    v-model="param"
+                    placeholder="输入患者姓名搜索">
+                <el-button slot="append" icon="el-icon-search" @click="searchx"></el-button>
+            </el-input>
+        </el-col>
     </el-row>
     <template>
         <el-table
@@ -87,15 +87,15 @@
             </el-form-item>
             <el-form-item label="处方药">
                 <%--<el-select--%>
-                        <%--multiple--%>
-                        <%--v-model="depatment"--%>
-                        <%--placeholder="请选择药品">--%>
-                    <%--<el-option--%>
-                            <%--v-for="item in depss"--%>
-                            <%--:key="item.drugName"--%>
-                            <%--:label="item.drugName"--%>
-                            <%--:value="item.drugName">--%>
-                    <%--</el-option>--%>
+                <%--multiple--%>
+                <%--v-model="depatment"--%>
+                <%--placeholder="请选择药品">--%>
+                <%--<el-option--%>
+                <%--v-for="item in depss"--%>
+                <%--:key="item.drugName"--%>
+                <%--:label="item.drugName"--%>
+                <%--:value="item.drugName">--%>
+                <%--</el-option>--%>
                 <%--</el-select>--%>
                 <el-select
                         v-model="value"
@@ -118,10 +118,10 @@
                 <el-input v-model="form.seekDrugcount"></el-input>
             </el-form-item>
             <%--<el-form-item label="活动区域">--%>
-                <%--<el-select v-model="form.region" placeholder="请选择活动区域">--%>
-                    <%--<el-option label="区域一" value="shanghai"></el-option>--%>
-                    <%--<el-option label="区域二" value="beijing"></el-option>--%>
-                <%--</el-select>--%>
+            <%--<el-select v-model="form.region" placeholder="请选择活动区域">--%>
+            <%--<el-option label="区域一" value="shanghai"></el-option>--%>
+            <%--<el-option label="区域二" value="beijing"></el-option>--%>
+            <%--</el-select>--%>
             <%--</el-form-item>--%>
 
             <el-form-item label="医生建议">

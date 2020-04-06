@@ -12,6 +12,11 @@
   <sql id="Base_Column_List" >
     pay_id, pay_name, pay_register, pay_drug, pay_all, pay_date
   </sql>
+
+  <!--<select id="selectName"  resultMap="">-->
+    <!--select-->
+  <!--</select>-->
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

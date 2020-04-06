@@ -25,18 +25,31 @@
     seek_id, seek_docter, seek_number, seek_name, seek_proposal, seek_drug, seek_drugcount, 
     seek_date
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select b.register_number,b.register_name,b.register_doctor, a.* from register b
-    LEFT JOIN seek a ON a.seek_docter=b.register_doctor
+
+  <select id="selectDrug" resultMap="BaseResultMap">
+    SELECT a.* from seek a
     <where>
-      <if test="seek_number!=null">
-        seek_number=#{seek_number}
-      </if>
+    <if test="seek_number!=null">
+      seek_number=#{seek_number}
+    </if>
       <if test="seek_name!=null">
-        and seek_name=#{seek_name}
+       and  seek_name=#{seek_name}
       </if>
     </where>
-    ORDER BY a.seek_id;
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select b.register_number,b.register_name,b.register_doctor, a.* from register b
+    LEFT JOIN seek a ON a.seek_number=b.register_number
+    <where>
+      <if test="register_number!=null">
+        register_number=#{register_number}
+      </if>
+      <if test="register_name!=null">
+        and register_name like CONCAT('%',#{register_name},'%')
+      </if>
+    </where>
+    ORDER BY b.register_number;
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

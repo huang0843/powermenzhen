@@ -32,6 +32,30 @@ public class SeekController {
 	}
 
 
+	@RequestMapping("selectDrug")
+	@ResponseBody
+	public <register> Object selectDrug(@RequestParam(required = false) Integer number,
+			@RequestParam(required = false) String name)
+	{
+		ResultBean bean=null;
+		if(name==""){
+			name=null;
+		}
+		try {
+			Map map=new HashMap();
+			map.put("seek_number",number);
+			map.put("seek_name",name);
+			List<Seek> list=seekMapper.selectDrug(map);
+			bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
+			bean.setObj(list);
+		}catch (Exception e){
+			e.printStackTrace();
+			bean=new ResultBean(ResultBean.Code.EXCEPTION);
+			bean.setMsg(e.getMessage());
+		}
+		return bean;
+	}
+
 	@RequestMapping("SeekList")
 	@ResponseBody
 	public <register> Object findallbyNumber(@RequestParam(required = false) Integer number,
@@ -40,8 +64,8 @@ public class SeekController {
 		ResultBean bean=null;
 		try {
 			Map map=new HashMap();
-			map.put("seek_number",number);
-			map.put("seek_name",name);
+			map.put("register_number",number);
+			map.put("register_name",name);
 			List<Seek> list=seekMapper.selectAll(map);
 			Register register=new Register();
 			for (int i = 0; i <list.size() ; i++) {

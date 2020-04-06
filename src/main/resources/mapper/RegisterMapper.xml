@@ -12,7 +12,7 @@
     <result column="register_date" property="registerDate" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    register_id, register_number, register_name, register_reason, register_doctor, register_type, 
+    register_id, register_number, register_name, register_reason, register_doctor, register_type,
     register_money, register_date
   </sql>
   <select id="selectAll" resultMap="BaseResultMap" >
@@ -22,7 +22,7 @@
 
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from register
     where register_id = #{registerId,jdbcType=INTEGER}
@@ -32,11 +32,11 @@
     where register_id = #{registerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.menzhen.bean.Register" >
-    insert into register (register_id, register_number, register_name, 
-      register_reason, register_doctor, register_type, 
+    insert into register (register_id, register_number, register_name,
+      register_reason, register_doctor, register_type,
       register_money, register_date)
-    values (#{registerId,jdbcType=INTEGER}, #{registerNumber,jdbcType=INTEGER}, #{registerName,jdbcType=VARCHAR}, 
-      #{registerReason,jdbcType=VARCHAR}, #{registerDoctor,jdbcType=VARCHAR}, #{registerType,jdbcType=VARCHAR}, 
+    values (#{registerId,jdbcType=INTEGER}, #{registerNumber,jdbcType=INTEGER}, #{registerName,jdbcType=VARCHAR},
+      #{registerReason,jdbcType=VARCHAR}, #{registerDoctor,jdbcType=VARCHAR}, #{registerType,jdbcType=VARCHAR},
       #{registerMoney,jdbcType=REAL}, #{registerDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.menzhen.bean.Register" >
