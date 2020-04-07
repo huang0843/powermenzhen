@@ -2,13 +2,19 @@ package com.menzhen.controller;
 
 import com.menzhen.bean.Drug;
 import com.menzhen.bean.Paydrug;
+import com.menzhen.bean.Seek;
 import com.menzhen.dao.DrugMapper;
 import com.menzhen.dao.PaydrugMapper;
 import com.menzhen.util.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -81,4 +87,27 @@ public class PayDrugController {
 		return bean;
 	}
 
+	@RequestMapping("selectPayDrug")
+	@ResponseBody
+	public Object selectPayDrug(@RequestParam(required = false) Integer number,
+			@RequestParam(required = false) String name)
+	{
+		ResultBean bean=null;
+		if(name==""){
+			name=null;
+		}
+		try {
+			Map map=new HashMap();
+			map.put("pd_number",number);
+			map.put("pd_patient",name);
+			List<Paydrug> list=paydrugMapper.selectAll(map);
+			bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
+			bean.setObj(list);
+		}catch (Exception e){
+			e.printStackTrace();
+			bean=new ResultBean(ResultBean.Code.EXCEPTION);
+			bean.setMsg(e.getMessage());
+		}
+		return bean;
+	}
 }

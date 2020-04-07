@@ -14,6 +14,19 @@
   <sql id="Base_Column_List">
     pd_id, pd_number, pd_name1, pd_day1, pd_name2, pd_day2, pd_patient, pd_moneyall
   </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT a.* from paydrug a
+    <where>
+      <if test="pd_patient!=null">
+        pd_patient=#{pd_patient}
+      </if>
+      <if test="pd_number!=null">
+        and pd_number=#{pd_number}
+      </if>
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

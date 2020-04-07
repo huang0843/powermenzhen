@@ -163,6 +163,16 @@
             </el-dialog>
 
             <el-tab-pane label="开药记录" name="third">
+                <el-row :gutter="20">
+                    <el-col :span="6" >
+                        <el-input
+                                @keyup.enter.native="searchx"
+                                v-model="param2"
+                                placeholder="输入患者姓名搜索">
+                            <el-button slot="append" icon="el-icon-search" @click="searchx2"></el-button>
+                        </el-input>
+                    </el-col>
+                </el-row>
                 <el-table
                         :data="tableData3"
                         border
@@ -238,6 +248,7 @@
                 tableData2: [],
                 tableData3: [],
                 param:'',
+                param2:'',
                 activeName: 'first',
                 dialogFormVisible: false
             }
@@ -292,6 +303,28 @@
                 console.log(str);
                 // console.log(this.param);
                 this.getDrug()
+            },
+            searchx2:function(str){
+                console.log(str);
+                // console.log(this.param);
+                this.getDrug2()
+            },
+            getDrug2(){
+                var data={
+                    'name':this.param2
+                }
+                var self=this;
+                axios.get('<%=basePath%>admin/menzhen/selectPayDrug',{params:data}).
+                then(function (response) {
+                    if(response.data.code=='10000'){
+                        self.tableData3=response.data.obj;
+                        console.log(self.tableData)
+                    }else {
+                        self.$message({ message: '加载失败', status: 'error' })
+                    }
+                }).catch(function (error) {
+                    self.$message({ message: '网路异常', status: 'error' })
+                })
             },
             getDrug(){
                 var data={
