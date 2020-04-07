@@ -9,11 +9,11 @@ public class Paydrug implements Serializable {
 
     private String pdName1;
 
-    private Float pdMoney1;
+    private Integer pdDay1;
 
     private String pdName2;
 
-    private Float pdMoney2;
+    private Integer pdDay2;
 
     private String pdPatient;
 
@@ -45,12 +45,12 @@ public class Paydrug implements Serializable {
         this.pdName1 = pdName1 == null ? null : pdName1.trim();
     }
 
-    public Float getPdMoney1() {
-        return pdMoney1;
+    public Integer getPdDay1() {
+        return pdDay1;
     }
 
-    public void setPdMoney1(Float pdMoney1) {
-        this.pdMoney1 = pdMoney1;
+    public void setPdDay1(Integer pdDay1) {
+        this.pdDay1 = pdDay1;
     }
 
     public String getPdName2() {
@@ -61,12 +61,12 @@ public class Paydrug implements Serializable {
         this.pdName2 = pdName2 == null ? null : pdName2.trim();
     }
 
-    public Float getPdMoney2() {
-        return pdMoney2;
+    public Integer getPdDay2() {
+        return pdDay2;
     }
 
-    public void setPdMoney2(Float pdMoney2) {
-        this.pdMoney2 = pdMoney2;
+    public void setPdDay2(Integer pdDay2) {
+        this.pdDay2 = pdDay2;
     }
 
     public String getPdPatient() {

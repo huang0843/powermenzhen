@@ -21,4 +21,6 @@ public interface DrugMapper {
     List<Drug> selectAll(Map map);
 
     List<String> selectName();
+
+    Drug selectMoney(String drug_name);
 }

@@ -33,6 +33,10 @@
   <select id="selectName" resultMap="BaseResultMap">
     SELECT a.drug_name from drug a  order by drug_name;
   </select>
+
+  <select id="selectMoney" resultMap="BaseResultMap">
+    SELECT a.drug_money ,a.drug_count ,a.drug_id from drug a  where a.drug_name=#{drug_name}
+  </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

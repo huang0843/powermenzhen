@@ -72,6 +72,7 @@
                 </el-table>
             </template>
             </el-tab-pane>
+
             <el-tab-pane label="开药情况" name="second">
                 <el-row :gutter="20">
                     <el-col :span="6" >
@@ -113,12 +114,102 @@
                             label="操作"
                             width="100">
                         <template slot-scope="scope">
-                            <el-button @click="handleClick1(scope.row)" type="text" size="small">开药</el-button>
+                            <el-button @click="edituser(scope.row)" type="text" size="small">开药</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
-            <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+
+            <el-dialog title="用户信息" :visible.sync="dialogFormVisible" width="380px">
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="患者姓名">
+                        <el-input v-model="form.seekName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="处方药">
+                        <el-select
+                        v-model="depatment1"
+                        placeholder="请选择药品">
+                        <el-option
+                        v-for="item in depss"
+                        :key="item.drugName"
+                        :label="item.drugName"
+                        :value="item.drugName">
+                        </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="建议天数">
+                        <el-input v-model="form.day1"></el-input>
+                    </el-form-item>
+                    <el-form-item label="处方药">
+                        <el-select
+                                v-model="depatment2"
+                                placeholder="请选择药品">
+                            <el-option
+                                    v-for="item in depss"
+                                    :key="item.drugName"
+                                    :label="item.drugName"
+                                    :value="item.drugName">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="建议天数">
+                        <el-input v-model="form.day2"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">立即保存</el-button>
+                        <el-button @click="dialogFormVisible = false">取消</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+
+            <el-tab-pane label="开药记录" name="third">
+                <el-table
+                        :data="tableData3"
+                        border
+                        style="width: 70%">
+                    <el-table-column
+                            fixed
+                            prop="pdPatient"
+                            label="患者姓名"
+                            width="90">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdName1"
+                            label="开药1"
+                            width="120">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdDay1"
+                            label="服用天数"
+                            width="120">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdName2"
+                            label="开药2"
+                            width="150">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdDay2"
+                            label="服用天数"
+                            width="200">
+                    </el-table-column>
+                    <el-table-column
+                            prop="pdMoneyall"
+                            label="总费用"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            fixed="right"
+                            label="操作"
+                            width="100">
+                        <template slot-scope="scope">
+                            <el-button @click="handleClick1(scope.row)" type="text" size="small">查看</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
+
+
             <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
         </el-tabs>
     </template>
@@ -136,11 +227,19 @@
         el:"#app",
         data(){
             return {
+                depss:[],
+                depatment1:'',
+                depatment2:'',
+                form: {
+                    seekName: '',
+                },
                 list: [],
                 tableData: [],
                 tableData2: [],
+                tableData3: [],
                 param:'',
-                activeName: 'first'
+                activeName: 'first',
+                dialogFormVisible: false
             }
         },
         created(){
@@ -150,9 +249,48 @@
             this.getdata2();
         },
         methods:{
+            onSubmit() {
+                var drug1=this.depatment1;
+                var drug2=this.depatment2;
+                // console.log(drug1);
+                // console.log(drug2);
+                // console.log(this.form);
+                var paydrug={
+                    'pdNumber':this.form.seekNumber,
+                    'pdName1':drug1,
+                    'pdDay1':this.form.day1,
+                    'pdName2':drug2,
+                    'pdDay2':this.form.day2,
+                    'pdPatient':this.form.seekName,
+                };
+                console.log(paydrug);
+                //ajaxs
+                var self=this;
+                axios.post('<%=basePath%>admin/menzhen/seekPayDrug', Qs.stringify(paydrug))
+                    .then(function (response) {
+                        if(response.data.code=='10000'){
+                            self.$message({
+                                type: 'success',
+                                message: '保存成功!'
+                            });
+                            this.dialogFormVisible=false;
+                            //保存后刷新数据表-----
+                        }else {
+                            self.$message({
+                                type: 'error',
+                                message: '保存失败!'
+                            });
+                        }
+                    }).catch(()=> {
+                    self.$message({
+                        type: 'error',
+                        message: '网络异常!'
+                    });
+                })
+                },
             searchx:function(str){
                 console.log(str);
-                console.log(this.param);
+                // console.log(this.param);
                 this.getDrug()
             },
             getDrug(){
@@ -177,8 +315,7 @@
                 axios.get('<%=basePath%>admin/menzhen/drugName').
                 then(function (response) {
                     if(response.data.code=='10000'){
-                        self.list=response.data.obj;
-                        // console.log(self.list);
+                        self.depss=response.data.obj;
                     }else {
                         self.$message({ message: '加载失败', status: 'error' })
                     }
@@ -201,11 +338,8 @@
                 })
             },
             edituser(row){
-                // this.imageUrl=row.managerImg;
-                // this.manager=row;
                 console.log(row);
-                console.log(row.register[0].registerName);
-                this.form=row.register[0];
+                this.form=row;
                 this.dialogFormVisible=true;
             },
             handleClick1(row) {

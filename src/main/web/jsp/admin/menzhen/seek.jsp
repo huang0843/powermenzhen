@@ -241,6 +241,7 @@
                 };
                 console.log(seek);
                 //ajaxs
+                var self=this;
                 axios.post('<%=basePath%>admin/menzhen/seekSave', Qs.stringify(seek))
                     .then(function (response) {
                         if(response.data.code=='10000'){
@@ -248,7 +249,7 @@
                                 type: 'success',
                                 message: '保存成功!'
                             });
-                            this.dialogFormVisible=false;
+                            self.dialogFormVisible=false;
                             //保存后刷新数据表-----
                             self.getdata();
                         }else {
