@@ -21,6 +21,15 @@ public class Seek implements Serializable {
     private Integer seekDrugcount;
 
     private Date seekDate;
+    private String seekDrugif;
+
+    public String getSeekDrugif() {
+        return seekDrugif;
+    }
+
+    public void setSeekDrugif(String seekDrugif) {
+        this.seekDrugif = seekDrugif;
+    }
 
     private List<Register> register=new ArrayList<>();
 

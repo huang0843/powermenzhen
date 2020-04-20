@@ -10,6 +10,7 @@
     <result column="seek_drug" property="seekDrug" jdbcType="VARCHAR" />
     <result column="seek_drugcount" property="seekDrugcount" jdbcType="INTEGER" />
     <result column="seek_date" property="seekDate" jdbcType="TIMESTAMP" />
+    <result column="seek_drugif" property="seekDrugif" jdbcType="VARCHAR" />
     <collection property="register" ofType="com.menzhen.bean.Register">
       <id column="register_id" property="registerId" jdbcType="INTEGER" />
       <result column="register_number" property="registerNumber" jdbcType="INTEGER" />
@@ -23,14 +24,15 @@
   </resultMap>
   <sql id="Base_Column_List" >
     seek_id, seek_docter, seek_number, seek_name, seek_proposal, seek_drug, seek_drugcount, 
-    seek_date
+    seek_date,seek_drugif
   </sql>
 
   <select id="selectDrug" resultMap="BaseResultMap">
     SELECT a.* from seek a
     <where>
+      a.seek_drugif is NULL
     <if test="seek_number!=null">
-      seek_number=#{seek_number}
+      and seek_number=#{seek_number}
     </if>
       <if test="seek_name!=null">
        and  seek_name=#{seek_name}
@@ -124,6 +126,17 @@
       </if>
     </trim>
   </insert>
+
+  <update id="update2" parameterType="com.menzhen.bean.Seek" >
+    update seek
+    <set>
+      <if test="seekDrugif != null" >
+        seek_drugif = #{seekDrugif,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seek_number = #{seekNumber,jdbcType=INTEGER}
+  </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.menzhen.bean.Seek" >
     update seek
     <set >

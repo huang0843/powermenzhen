@@ -5,6 +5,7 @@ import com.menzhen.bean.Paydrug;
 import com.menzhen.bean.Seek;
 import com.menzhen.dao.DrugMapper;
 import com.menzhen.dao.PaydrugMapper;
+import com.menzhen.dao.SeekMapper;
 import com.menzhen.util.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ public class PayDrugController {
 	public PaydrugMapper paydrugMapper;
 	@Autowired
 	public DrugMapper drugMapper;
+	@Autowired
+	public SeekMapper seekMapper;
 
 	//保存开药记录
 	@RequestMapping("seekPayDrug")
@@ -50,7 +53,7 @@ public class PayDrugController {
 			Drug drug=new Drug();
 			drug.setDrugId(drugId);        //设置id；
 			drug.setDrugCount(yu1);        //设置余数
-//			drugMapper.updateByPrimaryKeySelective(drug);  //更新库存
+			drugMapper.updateByPrimaryKeySelective(drug);  //更新库存
 
 			String name2=paydrug.getPdName2();
 			if(name2!=null&&!name2.equals("")){
@@ -73,7 +76,12 @@ public class PayDrugController {
 				paydrug.setPdMoneyall(allMoney);
 			}
 
+
 			rows=paydrugMapper.insertSelective(paydrug);
+			Seek seek=new Seek();
+			seek.setSeekNumber(paydrug.getPdNumber());
+			seek.setSeekDrugif("是");
+			int rows2=seekMapper.update2(seek); //状态改为已开药
 			if(rows>0){
 				bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
 			}else {

@@ -15,6 +15,7 @@ public interface SeekMapper {
     Seek selectByPrimaryKey(Integer seekId);
 
     int updateByPrimaryKeySelective(Seek record);
+    int update2(Seek record);
 
     int updateByPrimaryKey(Seek record);
 

@@ -301,7 +301,6 @@
                 },
             searchx:function(str){
                 console.log(str);
-                // console.log(this.param);
                 this.getDrug()
             },
             searchx2:function(str){
