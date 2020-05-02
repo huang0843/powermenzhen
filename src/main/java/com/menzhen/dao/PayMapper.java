@@ -19,4 +19,5 @@ public interface PayMapper {
     int updateByPrimaryKey(Pay record);
 
     List<Pay> selectName(Map map);
+    List<Pay> selectAll(Map map);
 }

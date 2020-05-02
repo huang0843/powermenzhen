@@ -8,14 +8,45 @@
     <result column="pay_drug" property="payDrug" jdbcType="REAL" />
     <result column="pay_all" property="payAll" jdbcType="REAL" />
     <result column="pay_date" property="payDate" jdbcType="DATE" />
+    <result column="register_name" property="registerName" jdbcType="VARCHAR" />
+    <collection property="register" ofType="com.menzhen.bean.Register">
+      <id column="register_id" property="registerId" jdbcType="INTEGER" />
+      <result column="register_number" property="registerNumber" jdbcType="INTEGER" />
+      <result column="register_name" property="registerName" jdbcType="VARCHAR" />
+      <result column="register_reason" property="registerReason" jdbcType="VARCHAR" />
+      <result column="register_doctor" property="registerDoctor" jdbcType="VARCHAR" />
+      <result column="register_type" property="registerType" jdbcType="VARCHAR" />
+      <result column="register_money" property="registerMoney" jdbcType="REAL" />
+      <result column="register_date" property="registerDate" jdbcType="DATE" />
+    </collection>
+    <collection property="paydrug" ofType="com.menzhen.bean.Paydrug">
+      <id column="pd_id" jdbcType="INTEGER" property="pdId" />
+      <result column="pd_number" jdbcType="INTEGER" property="pdNumber" />
+      <result column="pd_name1" jdbcType="VARCHAR" property="pdName1" />
+      <result column="pd_day1" jdbcType="INTEGER" property="pdDay1" />
+      <result column="pd_name2" jdbcType="VARCHAR" property="pdName2" />
+      <result column="pd_day2" jdbcType="INTEGER" property="pdDay2" />
+      <result column="pd_patient" jdbcType="VARCHAR" property="pdPatient" />
+      <result column="pd_moneyall" jdbcType="REAL" property="pdMoneyall" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
     pay_id, pay_name, pay_register, pay_drug, pay_all, pay_date
   </sql>
 
-  <!--<select id="selectName"  resultMap="">-->
-    <!--select-->
-  <!--</select>-->
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select * from pay
+  </select>
+
+  <select id="selectName"  resultMap="BaseResultMap">
+    SELECT c.register_name,c.register_type,c.register_money,c.pd_moneyall ,d.* from
+    (select a.register_name,a.register_type,a.register_money ,b.pd_moneyall
+    from register a,paydrug b
+    where a.register_number=b.pd_number) c LEFT JOIN pay d on c.register_name=d.pay_name
+    <if test="register_name!=null">
+      and register_name=#{register_name}
+    </if>
+  </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
