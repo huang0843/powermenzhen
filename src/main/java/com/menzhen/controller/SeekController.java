@@ -1,8 +1,10 @@
 package com.menzhen.controller;
 
+import com.menzhen.bean.Pdf;
 import com.menzhen.bean.Register;
 import com.menzhen.bean.Seek;
 import com.menzhen.dao.SeekMapper;
+import com.menzhen.util.PdfExport;
 import com.menzhen.util.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +36,48 @@ public class SeekController {
 		return "admin/menzhen/seek";
 	}
 
+	@RequestMapping(value = "/pdf", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public Object  selectApplyHorseRegByApplyTypeStatus(Map<String, Object> o, HttpServletResponse response,
+			String seekDocter,String seekName,String seekDrug,String seekProposal ) {
+		String resultMap = "1";
+		ResultBean bean=null;
+		try {
+
+			/***************************************主要是这里的东西*******************/
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			// 获取String类型的时间
+			String date = sdf.format(new Date());
+
+			map.put("hospital", "XX医院就诊报告单	");
+			map.put("name",seekName);
+			map.put("drugs", seekDrug);
+			map.put("advisers", seekProposal);
+			map.put("doctorname", seekDocter);
+			map.put("time", date);// date
+
+			//图片
+			Map<String, Object> map2 = new HashMap<String, Object>();
+//			map2.put("img", "D:\\bgimg.jpg");//
+
+			o.put("datemap", map);
+			o.put("imgmap", map2);
+			PdfExport.pdfout(o, response);
+			/***********************************************************************/
+			resultMap ="成功" ;
+			bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			bean=new ResultBean(ResultBean.Code.EXCEPTION);
+			bean.setMsg(e.getMessage());
+		}
+
+		return bean;
+	}
 
 	@RequestMapping("selectDrug")
 	@ResponseBody

@@ -71,10 +71,10 @@
             <el-table-column
                     fixed="right"
                     label="操作"
-                    width="100">
+                    width="150">
                 <template slot-scope="scope">
-                    <%--<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>--%>
                     <el-button type="text" size="small" @click="edituser(scope.row)">接诊</el-button>
+                    <el-button @click="handleClick(scope.row)" type="text" size="small">打印报告单</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -267,7 +267,19 @@
             },
             handleClick(row) {
                 console.log(row);
+                var pdf={
+                    'seekDocter':row.registerDoctor,
+                    'seekName':row.registerName,
+                    'seekProposal':row.seekProposal,
+                    'seekDrug':row.seekDrug,
+                };
+                var id="2";
+                console.log(pdf);
+                window.open("<%=basePath%>admin/menzhen/pdf?seekDocter="+ row.registerDoctor+"&&seekName="+row.registerName
+                +"&&seekDrug="+row.seekDrug+"&&seekProposal="+row.seekProposal);
+
             },
+
         }
     })
 </script>
