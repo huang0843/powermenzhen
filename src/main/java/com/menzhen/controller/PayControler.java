@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description:
@@ -88,24 +85,28 @@ public class PayControler extends BaseController {
 		}
 		try {
 			List<Pay> list=payMapper.selectName(map);
+			int times=list.size();
+			List<Pay> list2=new ArrayList<>();
+
 			for (int i = 0; i <list.size() ; i++) {
 				if(list.get(i).getPayName()!=null){
-					list.remove(i);
 					continue;
-				}
-				for (Register r:list.get(i).getRegister()
-				) {
-					list.get(i).setRegisterName(r.getRegisterName());
-					list.get(i).setRegisterType(r.getRegisterType());
-					list.get(i).setRegisterMoney(r.getRegisterMoney());
-				}
-				for (Paydrug r:list.get(i).getPaydrug()
-				) {
-					list.get(i).setPdMoneyall(r.getPdMoneyall());
+				}else {
+					for (Register r:list.get(i).getRegister()
+					) {
+						list.get(i).setRegisterName(r.getRegisterName());
+						list.get(i).setRegisterType(r.getRegisterType());
+						list.get(i).setRegisterMoney(r.getRegisterMoney());
+					}
+					for (Paydrug r:list.get(i).getPaydrug()
+					) {
+						list.get(i).setPdMoneyall(r.getPdMoneyall());
+					}
+					list2.add(list.get(i));
 				}
 			}
 			bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
-			bean.setObj(list);
+			bean.setObj(list2);
 		}catch (Exception e){
 			e.printStackTrace();
 			bean=new ResultBean(ResultBean.Code.EXCEPTION);
