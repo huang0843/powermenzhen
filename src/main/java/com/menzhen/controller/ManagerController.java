@@ -37,6 +37,16 @@ public class ManagerController {
         return "admin/manager/list";
     }
 
+    @RequestMapping("zhuxiao")
+    @ResponseBody
+    public Object zhuxiao(HttpServletRequest request){
+        ResultBean bean=null;
+        request.getSession().removeAttribute(Manager.CURRENT_MANAGER);
+        bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法
+        bean.setObj("util/login");
+        return bean;
+    }
+
     /**
      * 查询所有 管理者
      * @param index

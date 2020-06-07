@@ -29,7 +29,7 @@
     on rf.rf_roleid=mrf.rmrf_roleid
     inner  join power_system_menu menu
     on mrf.rmrf_menuid=menu.menu_id
-    where m.manager_id=7
+    where m.manager_id= #{menuId,jdbcType=INTEGER}
     ) t,power_system_menu m1
     where t.menu_id=m1.menu_id or m1.menu_id=t.menu_pid
   </select>

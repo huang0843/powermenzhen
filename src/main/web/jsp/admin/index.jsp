@@ -50,8 +50,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 <el-dropdown>
                     <i class="el-icon-setting" style="margin-right: 15px"></i>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>修改密码</el-dropdown-item>
-                        <el-dropdown-item>注销</el-dropdown-item>
+                        <%--<el-dropdown-item>修改密码</el-dropdown-item>--%>
+                        <el-dropdown-item  @click.native="zhuxiao()" >注销</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
                 <span>${manager.managerName}</span>
@@ -90,12 +90,26 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 editableTabs: [{
                     title: 'Tab 1',
                     name: '1',
-                    src:'http://www.baidu.com'
+                    src:'http://localhost:8080/util/huangying'
                 }],
                 tabIndex: 1
             }
         },
         methods: {
+            zhuxiao(){
+                var self=this;
+                axios.get('<%=basePath%>admin/manager/zhuxiao').
+                then(function (response) {
+                    if(response.data.code=='10000'){
+                        window.location.href="<%=basePath%>/util/login";
+                    }
+                }).catch(function (error) {
+                    self.$message({
+                        type: 'error',
+                        message: '网路异常!'
+                    });
+                })
+            },
             loadmenu(){
                 var self=this;
                 axios.get('<%=basePath%>admin/menu/manager').
@@ -128,7 +142,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     this.editableTabs.push({
                         title: title,
                         name: name,
-                        src: src
+                        src: '<%=basePath%>'+src
                     });
                 }
                 this.editableTabsValue = name;

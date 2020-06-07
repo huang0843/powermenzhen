@@ -176,7 +176,7 @@
                 <el-table
                         :data="tableData3"
                         border
-                        style="width: 70%">
+                        style="width: 80%">
                     <el-table-column
                             fixed
                             prop="pdPatient"
@@ -220,7 +220,7 @@
             </el-tab-pane>
 
 
-            <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+            <%--<el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>--%>
         </el-tabs>
     </template>
 

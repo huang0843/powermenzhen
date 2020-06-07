@@ -121,6 +121,7 @@ public class SeekController {
                   list.get(i).setRegisterNumber(r.getRegisterNumber());
                   list.get(i).setRegisterName(r.getRegisterName());
                   list.get(i).setRegisterDoctor(r.getRegisterDoctor());
+                  list.get(i).setRegisterReason(r.getRegisterReason());
 				}
 			}
 			bean=new ResultBean(ResultBean.Code.SUCCESS);//枚举写法

@@ -33,7 +33,7 @@
         <vxe-table-column field="registerId" title="挂号id" sortable :edit-render="{name: 'input'}" :visible="false"></vxe-table-column>
         <vxe-table-column field="registerNumber" title="挂号编号" sortable :edit-render="{name: 'input'}"></vxe-table-column>
         <vxe-table-column field="registerName" title="姓名" sortable :edit-render="{name: 'input', defaultValue: '请输入病人姓名'}"></vxe-table-column>
-        <vxe-table-column field="registerReason" title="挂号科室" sortable :edit-render="{name: 'input'}"></vxe-table-column>
+        <vxe-table-column field="registerReason" title="挂号原因" sortable :edit-render="{name: 'input'}"></vxe-table-column>
         <vxe-table-column field="registerDoctor" title="挂号医生" sortable :edit-render="{name: 'input'}"></vxe-table-column>
         <vxe-table-column field="registerType" title="挂号类别" :edit-render="{name: 'select', options: typeList,defaultValue: '普通号'}"></vxe-table-column>
         <vxe-table-column field="registerMoney" title="金额" sortable :edit-render="{name: 'input', defaultValue: 10}"></vxe-table-column>

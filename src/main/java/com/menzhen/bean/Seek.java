@@ -44,6 +44,15 @@ public class Seek implements Serializable {
     private Integer registerNumber;
     private String registerName;
     private String registerDoctor;
+    private String registerReason;
+
+    public String getRegisterReason() {
+        return registerReason;
+    }
+
+    public void setRegisterReason(String registerReason) {
+        this.registerReason = registerReason;
+    }
 
     public Integer getRegisterNumber() {
         return registerNumber;

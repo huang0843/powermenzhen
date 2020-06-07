@@ -41,8 +41,8 @@
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select b.register_number,b.register_name,b.register_doctor, a.* from register b
-    LEFT JOIN seek a ON a.seek_number=b.register_number
+    select b.register_number,b.register_name,b.register_doctor,b.register_reason, a.* from register b
+    LEFT JOIN seek a ON b.register_number=a.seek_number
     <where>
       <if test="register_number!=null">
         register_number=#{register_number}

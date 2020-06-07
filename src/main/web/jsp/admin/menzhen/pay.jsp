@@ -30,7 +30,7 @@
                     <el-table
                             :data="tableData"
                             border
-                            style="width: 500px">
+                            style="width: 600px">
                         <el-table-column
                                 prop="registerName"
                                 label="姓名"
@@ -44,12 +44,12 @@
                         <el-table-column
                                 prop="registerMoney"
                                 label="挂号费用"
-                                width="80">
+                                width="120">
                         </el-table-column>
                         <el-table-column
                                 prop="pdMoneyall"
                                 label="药品费用"
-                                width="80">
+                                width="120">
                         </el-table-column>
                         <el-table-column
                                 fixed="right"
@@ -80,7 +80,7 @@
                     <el-table
                             :data="tableData2"
                             border
-                            style="width: 580px">
+                            style="width: 70%">
                         <el-table-column
                                 prop="payName"
                                 label="姓名"
@@ -89,22 +89,22 @@
                         <el-table-column
                                 prop="payRegister"
                                 label="挂号费用"
-                                width="120">
+                                width="150">
                         </el-table-column>
                         <el-table-column
                                 prop="payDrug"
                                 label="取药费用"
-                                width="80">
+                                width="150">
                         </el-table-column>
                         <el-table-column
                                 prop="payAll"
                                 label="总共费用"
-                                width="80">
+                                width="150">
                         </el-table-column>
                             <el-table-column
                                     prop="payDate"
                                     label="支付时间"
-                                    width="180">
+                                    width="200">
                             </el-table-column>
                         <%--<el-table-column--%>
                                 <%--fixed="right"--%>

@@ -43,6 +43,11 @@ public class UtilController {
         return "/login/index";
     }
 
+	@RequestMapping("huangying")
+	public String huangying(){
+		return "/admin/huanying";
+	}
+
     @ResponseBody
     @RequestMapping("login/do")
     public Object login(String password,String username,
