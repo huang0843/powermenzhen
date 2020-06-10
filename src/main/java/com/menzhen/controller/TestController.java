@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
     @RequestMapping("index")
     public  String test(){
-        System.out.println("test");
+        System.out.println("test123");
         return "admin/index";
     }
 
