@@ -16,7 +16,7 @@ public class AopDemo {
 
     Logger logger=Logger.getLogger(AopDemo.class);
 
-    @Pointcut("execution(public * com.neusoft.controller.*.*(..))")
+    @Pointcut("execution(public * com.menzhen.controller.*.*(..))")
     public  void pointcut(){}
 
     @Before("pointcut()")
